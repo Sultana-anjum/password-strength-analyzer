@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Strength Analyzer</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 80px;
+            background-color: #f4f4f4;
+        }
+        input {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Password Strength Analyzer</h2>
+
+    <input type="password" id="password" placeholder="Enter password"><br>
+    <button onclick="checkPassword()">Check Strength</button>
+
+    <p id="result"></p>
+
+    <script>
+        function checkPassword() {
+            let pwd = document.getElementById("password").value;
+            let strength = "Weak";
+            let score = 0;
+
+            if (pwd.length >= 8) score++;
+            if (/[a-z]/.test(pwd)) score++;
+            if (/[A-Z]/.test(pwd)) score++;
+            if (/[0-9]/.test(pwd)) score++;
+            if (/[!@#$%^&*]/.test(pwd)) score++;
+
+            if (score <= 2) strength = "Weak";
+            else if (score == 3 || score == 4) strength = "Medium";
+            else strength = "Strong";
+
+            document.getElementById("result").innerText = "Strength: " + strength;
+        }
+    </script>
+
+</body>
+</html>
